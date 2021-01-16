@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <style>
+     #logo {
+      float:left;
+      height:70px;
+      width:250px;
+    }
+        #parent {
+      margin:auto;
+      width:1000px;
+      height:1000px;
+    }
+    </style>
+    <title>GM Movie</title>
+</head>
+<body>
+<div id='parent'>
+  <a href="/"><img id='logo' src="{{ url_for('static', filename='img/logo.png') }}" alt="dd"></a>
+  <img style="width:1000px;" src="{{ url_for('static', filename='img/home.jpg') }}" alt="dd">
+  <h1 style="margin-left:0px;">Your Order List</h1>
+    {% if result=='noorder' %}
+    <h1>No Orders</h1>
+  {% else %}
+    <table border="1">
+    <th>Order ID</th><th>Movie Name</th><th>Date Time</th><th>Return Date</th><th>Rating</th>
+    {% for o in result %}
+      <tr><td>{{o['OrderId']}}</td><td>{{o['MovieName']}}</td>
+        <td>{{o['Date_Time']}}</td><td>{{o['Return_Date']}}</td><td>{{o['ORating']}}</td></tr>
+    {% endfor %}
+  </table>
+    <br>
+  <form action = "http://127.0.0.1:5000/rateMovie" method="POST">
+      <input type="text" class="form-control" placeholder="Order ID" id="OrderId" name="OrderId"/>
+      <input type="text" class="form-control" placeholder="Rating:1~5" id="Rating" name="Rating"/>
+      <button type="submit" class="ratebtn">Submit Rating</button>
+  </form>
+    {% endif %}
+</div>
+</body>
+</html>

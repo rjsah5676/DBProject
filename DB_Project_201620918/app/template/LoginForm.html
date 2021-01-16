@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+     #logo {
+      float:left;
+      height:70px;
+      width:250px;
+    }
+    .loginbtn {
+      float:right;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      -webkit-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+      -moz-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+      -ms-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+      -o-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+      transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+      display: block;
+      max-width: 180px;
+      text-decoration: none;
+      border-radius: 4px;
+      padding: 10px 10px;
+      color: rgba(30, 22, 54, 0.6);
+      box-shadow: rgba(30, 22, 54, 0.4) 0 0px 0px 2px inset;
+    }
+    .loginbtn:hover {
+      color: rgba(255, 255, 255, 0.85);
+      box-shadow: rgba(30, 22, 54, 0.7) 0 0px 0px 40px inset;
+    }
+     #parent {
+      margin:auto;
+      width:1000px;
+      height:1000px;
+    }
+    </style>
+    <title>GM Movie</title>
+</head>
+
+<body>
+<div id='parent'>
+  <a href="/"><img id='logo' src="{{ url_for('static', filename='img/logo.png') }}" alt="dd"></a>
+  <img style="width:1000px;" src="{{ url_for('static', filename='img/home.jpg') }}" alt="dd">
+  <h2>Login</h2>
+  <form action = "http://127.0.0.1:5000/login" method="POST" style="max-width:250px;">
+      <input style="height:33px;" type="text" class="form-control" placeholder="Email" id="LoginId" name="LoginId"/>
+      <button type="submit" class="loginbtn">Login</button>
+  </form>
+</div>
+</body>
+</html>

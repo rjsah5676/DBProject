@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <style>
+    #parent {
+      margin:auto;
+      width:1000px;
+      height:1000px;
+    }
+    .nav {
+      margin-left:auto;
+      width:400px;
+      height:100px;
+      text-align:right;
+    }
+    #logo {
+      float:left;
+      height:70px;
+      width:250px;
+    }
+    .wrapper {
+      width:900px;
+      margin-left:auto;
+      margin-right:auto;
+      display: grid;
+      grid-template-columns: 300px 300px 300px;
+      grid-template-rows: 250px 250px 250px;
+    }
+    .content {
+      border: 1px dotted grey;
+    }
+    .nav_btn {
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      -webkit-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+      -moz-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+      -ms-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+      -o-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+      transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+      display: block;
+      max-width: 180px;
+      text-decoration: none;
+      border-radius: 4px;
+      padding: 10px 10px;
+      color: rgba(30, 22, 54, 0.6);
+      box-shadow: rgba(30, 22, 54, 0.4) 0 0px 0px 2px inset;
+    }
+    .nav_btn:hover {
+      color: rgba(255, 255, 255, 0.85);
+      box-shadow: rgba(30, 22, 54, 0.7) 0 0px 0px 40px inset;
+    }
+      .btn {
+      margin:auto;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      -webkit-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+      -moz-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+      -ms-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+      -o-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+      transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+      display: block;
+      max-width: 250px;
+      text-decoration: none;
+      border-radius: 4px;
+      padding: 10px 10px;
+      background-color:#2E2E2E;
+      color: white;
+      box-shadow: #000000 0 0px 0px 2px inset;
+    }
+    .btn:hover {
+      color: rgba(255, 255, 255, 0.85);
+      box-shadow: #000000 0 0px 0px 40px inset;
+    }
+    .icon {
+      margin-left:50px;
+      width:200px;
+      height:200px;
+    }
+      </style>
+      <title>GM Movie</title>
+    </head>
+
+    <body>
+    <div id='parent'>
+      <a href="/"><img id='logo' src="{{ url_for('static', filename='img/logo.png') }}" alt="dd"></a>
+    {% if session['logged_in'] %}
+      <div class="nav">
+      <h2>Welcome '{{session['logged_in']['LName']}}{{session['logged_in']['FName']}}' !</h2>
+      <input type="button" class="nav_btn" style="float:right; margin-left:20px;" value="Logout" onclick="location.href='/logout'">
+      <input type="button" class="nav_btn" style="float:right;" value="Show Movie List" onclick="location.href='/showMovieList'"></div>
+        <img style="width:1000px;" src="{{ url_for('static', filename='img/home.jpg') }}" alt="dd">
+      <h1 style="margin-left:30px;">MENU</h1>
+      <div class="wrapper">
+        <div class="content">
+          <img class="icon" src="{{ url_for('static', filename='img/helds.png') }}" alt="dd">
+          <input class="btn" type="button" value="Currently Held Movies" onclick="location.href='/customerHeldMovies'"><br></div>
+        <div class="content">
+          <img class="icon" src="{{ url_for('static', filename='img/queue.png') }}" alt="dd">
+          <input class="btn" type="button" value="Your Movie Queue" onclick="location.href='/customerQueue'"><br></div>
+        <div class="content">
+          <img class="icon" src="{{ url_for('static', filename='img/account.png') }}" alt="dd">
+          <input class="btn" type="button" value="Your Account Information" onclick="location.href='/customerAccount'"><br></div>
+        <div class="content">
+          <img class="icon" src="{{ url_for('static', filename='img/type.png') }}" alt="dd">
+          <form action = "http://127.0.0.1:5000/availableType" method="POST">
+          <select name="type" style="height:33px; width:150px;">
+            <option value="Comedy" selected="selected">Comedy</option>
+            <option value="Drama">Drama</option>
+            <option value="Action">Action</option>
+            <option value="Foreign">Foreign</option>
+          </select>
+          <button type="submit" class="btn" style="float:right;">Select Movie Type</button>
+              </form><br></div>
+        <div class="content">
+          <img class="icon" src="{{ url_for('static', filename='img/searchMovie.png') }}" alt="dd">
+          <form action = "http://127.0.0.1:5000/searchMovie" method="POST">
+          <input type="text" style="height:33px;" class="form-control" placeholder="Movie Name" id="name" name="name"/>
+          <button type="submit" style="float:right;" class="btn">Search Movie</button>
+              </form><br></div>
+        <div class="content">
+          <img class="icon" src="{{ url_for('static', filename='img/searchActor.png') }}" alt="dd">
+          <form action = "http://127.0.0.1:5000/actorAppearedIn" method="POST">
+        <input type="text" style="height:33px;" class="form-control" placeholder="Actor Name" id="actor" name="actor"/>
+        <button type="submit" style="float:right;" class="btn">Search Actor</button>
+              </form><br></div>
+        <div class="content">
+          <img class="icon" src="{{ url_for('static', filename='img/best.png') }}" alt="dd">
+          <input class="btn" type="button" value="Show Best-Seller" onclick="location.href='/showBestSeller'"><br></div>
+        <div class="content">
+          <img class="icon" src="{{ url_for('static', filename='img/recommended.png') }}" alt="dd">
+          <input class="btn" type="button" value="Show Movie Recommedation List" onclick="location.href='/suggestMovie'"><br></div>
+        <div class="content">
+          <img class="icon" src="{{ url_for('static', filename='img/rate.png') }}" alt="dd">
+          <input class="btn" type="button" value="Rate to Movie" onclick="location.href='/showOrder'"><br></div>
+      </div>
+    {% else %}
+      <div class="nav">
+      <input type="button" class="nav_btn" style="float:right; margin-left:20px;" value="Sign Up" onclick="location.href='/signup'">
+      <input type="button" class="nav_btn" style="float:right;" value="Login" onclick="location.href='/login'">
+      </div>
+      <img style="width:1000px;" src="{{ url_for('static', filename='img/home.jpg') }}" alt="dd">
+    {% endif %}
+    </div>
+    </body>
+</html>

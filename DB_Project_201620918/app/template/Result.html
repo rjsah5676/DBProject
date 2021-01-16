@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+     #logo {
+      float:left;
+      height:70px;
+      width:250px;
+    }
+        #parent {
+      margin:auto;
+      width:1000px;
+      height:1000px;
+    }
+  </style>
+  <title>GM Movie</title>
+</head>
+
+<body>
+<div id='parent'>
+  <a href="/"><img id='logo' src="{{ url_for('static', filename='img/logo.png') }}" alt="dd"></a>
+  <img style="width:1000px;" src="{{ url_for('static', filename='img/home.jpg') }}" alt="dd">
+  {% if result == 'nomovie' %}
+    <h1>No Result</h1>
+  {% else %}
+    {% if method == 'current' %}
+      <h1>Currently held Movies</h1><br> <h2>{{result}}</h2>
+    {% endif %}
+    {% if method == 'queue' %}
+      <h1>Your Movie Queues</h1><br> <h2>{{result}}</h2>
+    {% endif %}
+    {% if method == 'account' %}
+      <h1>Your Account Information</h1><br> <h2>{{result}}</h2>
+    {% endif %}
+    {% if method == 'type' %}
+      <h1>'{{type}}' Movies</h1><br> <h2>{{result}}</h2>
+    {% endif %}
+    {% if method == 'search' %}
+      <h1>Search Result by keywords<b>{{name}}</b></h1><br> <h2>{{result}}</h2>
+    {% endif %}
+    {% if method == 'actor' %}
+      <h1>List of Movies <b>'{{actor}}'</b> appeared in</h1><br> <h2>{{result}}</h2>
+    {% endif %}
+    {% if method == 'best' %}
+      <h1>Best-Seller Movie List</h1><br> <h2>{{result}}</h2>
+    {% endif %}
+    {% if method == 'suggest' %}
+      <h1>Recommended Movie List</h1><br> <h2>{{result}}</h2>
+    {% endif %}
+  {% endif %}
+</div>
+</body>
+</html>
